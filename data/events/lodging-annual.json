@@ -1,0 +1,164 @@
+{
+  "event_id": "lodging-annual",
+  "event_name": "じゃらん宿泊年間推移",
+  "data_source": "じゃらんエリアダッシュボード (Tableau Cloud)",
+  "period": "2024-04 〜 2026-03 (24ヶ月)",
+  "last_updated": "2026-05-11T08:00:00+09:00",
+  "monthly": [
+    {
+      "month": "2024-04",
+      "torihiki_man": 3916,
+      "jinpaku": 3880,
+      "tanka_yen": 10094
+    },
+    {
+      "month": "2024-05",
+      "torihiki_man": 5234,
+      "jinpaku": 4889,
+      "tanka_yen": 10706
+    },
+    {
+      "month": "2024-06",
+      "torihiki_man": 4905,
+      "jinpaku": 4660,
+      "tanka_yen": 10526
+    },
+    {
+      "month": "2024-07",
+      "torihiki_man": 4256,
+      "jinpaku": 4263,
+      "tanka_yen": 9983
+    },
+    {
+      "month": "2024-08",
+      "torihiki_man": 6149,
+      "jinpaku": 5762,
+      "tanka_yen": 10671
+    },
+    {
+      "month": "2024-09",
+      "torihiki_man": 5055,
+      "jinpaku": 4892,
+      "tanka_yen": 10334
+    },
+    {
+      "month": "2024-10",
+      "torihiki_man": 5385,
+      "jinpaku": 5018,
+      "tanka_yen": 10731
+    },
+    {
+      "month": "2024-11",
+      "torihiki_man": 5444,
+      "jinpaku": 5147,
+      "tanka_yen": 10578
+    },
+    {
+      "month": "2024-12",
+      "torihiki_man": 4154,
+      "jinpaku": 3910,
+      "tanka_yen": 10625
+    },
+    {
+      "month": "2025-01",
+      "torihiki_man": 3615,
+      "jinpaku": 3300,
+      "tanka_yen": 10956
+    },
+    {
+      "month": "2025-02",
+      "torihiki_man": 3679,
+      "jinpaku": 3522,
+      "tanka_yen": 10446
+    },
+    {
+      "month": "2025-03",
+      "torihiki_man": 4140,
+      "jinpaku": 3941,
+      "tanka_yen": 10505
+    },
+    {
+      "month": "2025-04",
+      "torihiki_man": 4274,
+      "jinpaku": 4161,
+      "tanka_yen": 10273
+    },
+    {
+      "month": "2025-05",
+      "torihiki_man": 5521,
+      "jinpaku": 4959,
+      "tanka_yen": 11133
+    },
+    {
+      "month": "2025-06",
+      "torihiki_man": 5486,
+      "jinpaku": 5195,
+      "tanka_yen": 10561
+    },
+    {
+      "month": "2025-07",
+      "torihiki_man": 5216,
+      "jinpaku": 4666,
+      "tanka_yen": 11178
+    },
+    {
+      "month": "2025-08",
+      "torihiki_man": 7624,
+      "jinpaku": 6664,
+      "tanka_yen": 11440
+    },
+    {
+      "month": "2025-09",
+      "torihiki_man": 5511,
+      "jinpaku": 4880,
+      "tanka_yen": 11292
+    },
+    {
+      "month": "2025-10",
+      "torihiki_man": 6872,
+      "jinpaku": 6022,
+      "tanka_yen": 11412
+    },
+    {
+      "month": "2025-11",
+      "torihiki_man": 6233,
+      "jinpaku": 5358,
+      "tanka_yen": 11633
+    },
+    {
+      "month": "2025-12",
+      "torihiki_man": 4618,
+      "jinpaku": 4058,
+      "tanka_yen": 11380
+    },
+    {
+      "month": "2026-01",
+      "torihiki_man": 4132,
+      "jinpaku": 3460,
+      "tanka_yen": 11942
+    },
+    {
+      "month": "2026-02",
+      "torihiki_man": 4265,
+      "jinpaku": 3946,
+      "tanka_yen": 10808
+    },
+    {
+      "month": "2026-03",
+      "torihiki_man": 4630,
+      "jinpaku": 4455,
+      "tanka_yen": 10393
+    }
+  ],
+  "summary": {
+    "r6_torihiki_man": 55932,
+    "r6_jinpaku": 53184,
+    "r6_tanka_yen": 10517,
+    "r7_torihiki_man": 64382,
+    "r7_jinpaku": 57824,
+    "r7_tanka_yen": 11134,
+    "yoy_torihiki_pct": 15.1,
+    "yoy_jinpaku_pct": 8.7,
+    "yoy_tanka_pct": 5.9
+  }
+}

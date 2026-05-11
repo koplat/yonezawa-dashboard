@@ -886,8 +886,8 @@ main{padding:40px 0 60px}
 <div id="panel-lodging" class="panel" style="display:none">
 <div class="section-header">
 <div class="section-num">08 — Lodging · R8 GW</div>
-<div class="section-h2">宿泊データ（じゃらん エリアダッシュボード ver.2）</div>
-<div class="section-lead">R8（2026年度）GW期間 5/1〜5/8 の宿泊実績。出典：じゃらんエリアダッシュボード（リクルート）／比較年：1年前（2025年GW）／データソース更新日時：2026-05-08 09:10</div>
+<div class="section-h2">宿泊データ（じゃらん）</div>
+<div class="section-lead">じゃらんエリアダッシュボードから取得した24ヶ月間（R6年度＋R7年度）の宿泊実績。月次の取扱額・人泊数・単価の推移と、R6/R7年度比較を可視化</div>
 </div>
 
 <div class="exec-summary">
@@ -913,6 +913,80 @@ main{padding:40px 0 60px}
 </ul>
 </div>
 </div>
+</div>
+
+<div class="note">
+<strong>📊 年間概況（R7年度 / 2025-04〜2026-03）：</strong>取扱額 <strong>6.4億円（前年比+15.1%）</strong>、人泊数 <strong>57,824人（+8.7%）</strong>、単価 <strong>11,134円（+5.9%）</strong>。8月（水上花火月）が最大、1月が最少の典型的なシーズナリティ。R7年度は全12ヶ月のうち11ヶ月で前年同月比プラス。
+</div>
+
+<div class="kpi-grid">
+<div class="kpi-card"><div class="kpi-label">R7年度 取扱額</div><div class="kpi-value">6.44<span class="kpi-unit">億円</span></div><div class="kpi-change up">▲ 前年比 +15.1%（R6: 5.59億円）</div></div>
+<div class="kpi-card"><div class="kpi-label">R7年度 人泊数</div><div class="kpi-value">57,824<span class="kpi-unit">人</span></div><div class="kpi-change up">▲ 前年比 +8.7%（R6: 53,184人）</div></div>
+<div class="kpi-card"><div class="kpi-label">R7年度 平均単価</div><div class="kpi-value">11,134<span class="kpi-unit">円</span></div><div class="kpi-change up">▲ 前年比 +5.9%（R6: 10,517円）</div></div>
+<div class="kpi-card"><div class="kpi-label">R7年度 ピーク月</div><div class="kpi-value" style="font-size:20px">2025年8月</div><div class="kpi-change">7,624万円・水上花火月</div></div>
+</div>
+
+<div class="section-card">
+<div class="section-title">月別 取扱額の推移（R6 vs R7・24ヶ月）</div>
+<div class="section-desc">R6年度（2024/4〜2025/3）と R7年度（2025/4〜2026/3）の月次取扱額。グレー=R6、赤=R7。8月（水上花火）と10月（戦国花火）がピーク</div>
+<div class="chart-container tall"><canvas id="chartLodgeMonthly"></canvas></div>
+</div>
+
+<div class="grid-2">
+<div class="section-card">
+<div class="section-title">月別 人泊数の推移</div>
+<div class="section-desc">月次の延べ宿泊人数。R7は全月でR6を上回る</div>
+<div class="chart-container"><canvas id="chartLodgeJinpaku"></canvas></div>
+</div>
+<div class="section-card">
+<div class="section-title">月別 人泊単価の推移</div>
+<div class="section-desc">単価は冬季（1-2月）に上昇、春に低下する季節性。R7は前年比+5.9%</div>
+<div class="chart-container"><canvas id="chartLodgeTanka"></canvas></div>
+</div>
+</div>
+
+<div class="section-card">
+<div class="section-title">月別 詳細（24ヶ月一覧）</div>
+<div class="section-desc">R6年度・R7年度の月次実績</div>
+<table class="comp-table">
+<thead><tr><th>年月</th><th class="num">取扱額（万円）</th><th class="num">人泊数（人）</th><th class="num">単価（円）</th><th class="num">前年同月比（取扱額）</th></tr></thead>
+<tbody>
+<tr style="background:#f1f5f9;font-weight:700"><td colspan="5">R6年度（2024年4月〜2025年3月）</td></tr>
+<tr><td>2024-04</td><td class="num">3,916</td><td class="num">3,880</td><td class="num">10,094</td><td class="num">—</td></tr>
+<tr><td>2024-05</td><td class="num">5,234</td><td class="num">4,889</td><td class="num">10,706</td><td class="num">—</td></tr>
+<tr><td>2024-06</td><td class="num">4,905</td><td class="num">4,660</td><td class="num">10,526</td><td class="num">—</td></tr>
+<tr><td>2024-07</td><td class="num">4,256</td><td class="num">4,263</td><td class="num">9,983</td><td class="num">—</td></tr>
+<tr><td>2024-08</td><td class="num">6,149</td><td class="num">5,762</td><td class="num">10,671</td><td class="num">—</td></tr>
+<tr><td>2024-09</td><td class="num">5,055</td><td class="num">4,892</td><td class="num">10,334</td><td class="num">—</td></tr>
+<tr><td>2024-10</td><td class="num">5,385</td><td class="num">5,018</td><td class="num">10,731</td><td class="num">—</td></tr>
+<tr><td>2024-11</td><td class="num">5,444</td><td class="num">5,147</td><td class="num">10,578</td><td class="num">—</td></tr>
+<tr><td>2024-12</td><td class="num">4,154</td><td class="num">3,910</td><td class="num">10,625</td><td class="num">—</td></tr>
+<tr><td>2025-01</td><td class="num">3,615</td><td class="num">3,300</td><td class="num">10,956</td><td class="num">—</td></tr>
+<tr><td>2025-02</td><td class="num">3,679</td><td class="num">3,522</td><td class="num">10,446</td><td class="num">—</td></tr>
+<tr><td>2025-03</td><td class="num">4,140</td><td class="num">3,941</td><td class="num">10,505</td><td class="num">—</td></tr>
+<tr class="cat-subtotal"><td>R6年度 計</td><td class="num">55,932</td><td class="num">53,184</td><td class="num">10,517</td><td class="num">—</td></tr>
+<tr style="background:#fdf2f8;font-weight:700"><td colspan="5">R7年度（2025年4月〜2026年3月）</td></tr>
+<tr><td>2025-04</td><td class="num">4,274</td><td class="num">4,161</td><td class="num">10,273</td><td class="num delta-up">+9.1%</td></tr>
+<tr><td>2025-05</td><td class="num">5,521</td><td class="num">4,959</td><td class="num">11,133</td><td class="num delta-up">+5.5%</td></tr>
+<tr><td>2025-06</td><td class="num">5,486</td><td class="num">5,195</td><td class="num">10,561</td><td class="num delta-up">+11.8%</td></tr>
+<tr><td>2025-07</td><td class="num">5,216</td><td class="num">4,666</td><td class="num">11,178</td><td class="num delta-up">+22.6%</td></tr>
+<tr><td>2025-08</td><td class="num">7,624</td><td class="num">6,664</td><td class="num">11,440</td><td class="num delta-up">+24.0%</td></tr>
+<tr><td>2025-09</td><td class="num">5,511</td><td class="num">4,880</td><td class="num">11,292</td><td class="num delta-up">+9.0%</td></tr>
+<tr><td>2025-10</td><td class="num">6,872</td><td class="num">6,022</td><td class="num">11,412</td><td class="num delta-up">+27.6%</td></tr>
+<tr><td>2025-11</td><td class="num">6,233</td><td class="num">5,358</td><td class="num">11,633</td><td class="num delta-up">+14.5%</td></tr>
+<tr><td>2025-12</td><td class="num">4,618</td><td class="num">4,058</td><td class="num">11,380</td><td class="num delta-up">+11.2%</td></tr>
+<tr><td>2026-01</td><td class="num">4,132</td><td class="num">3,460</td><td class="num">11,942</td><td class="num delta-up">+14.3%</td></tr>
+<tr><td>2026-02</td><td class="num">4,265</td><td class="num">3,946</td><td class="num">10,808</td><td class="num delta-up">+15.9%</td></tr>
+<tr><td>2026-03</td><td class="num">4,630</td><td class="num">4,455</td><td class="num">10,393</td><td class="num delta-up">+11.8%</td></tr>
+<tr class="grand-total"><td>R7年度 計</td><td class="num">64,382</td><td class="num">57,824</td><td class="num">11,134</td><td class="num">+15.1%</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="section-header" style="margin-top:36px;border-top:2px solid var(--border);padding-top:24px">
+<div class="section-num">Detail · GW 2026</div>
+<div class="section-h2">GW期間詳細（2026年5/1〜5/8）</div>
+<div class="section-lead">R8（2026年度）GW期間の宿泊実績詳細。発地・年代・予約タイミング等</div>
 </div>
 
 <div class="note">
@@ -1968,6 +2042,44 @@ document.addEventListener('DOMContentLoaded', () => {
       t.addEventListener('click', () => setTimeout(() => loadIdeas(eventId, ctx), 100));
     });
   });
+});
+
+// =========== 宿泊年間推移（R6+R7・24ヶ月） ===========
+const LODGE_MONTHS = ['24/04','24/05','24/06','24/07','24/08','24/09','24/10','24/11','24/12','25/01','25/02','25/03','25/04','25/05','25/06','25/07','25/08','25/09','25/10','25/11','25/12','26/01','26/02','26/03'];
+const LODGE_TORIHIKI = [3916,5234,4905,4256,6149,5055,5385,5444,4154,3615,3679,4140,4274,5521,5486,5216,7624,5511,6872,6233,4618,4132,4265,4630];
+const LODGE_JINPAKU = [3880,4889,4660,4263,5762,4892,5018,5147,3910,3300,3522,3941,4161,4959,5195,4666,6664,4880,6022,5358,4058,3460,3946,4455];
+const LODGE_TANKA = [10094,10706,10526,9983,10671,10334,10731,10578,10625,10956,10446,10505,10273,11133,10561,11178,11440,11292,11412,11633,11380,11942,10808,10393];
+
+// 月別比較：R6 vs R7（X軸を月（4-3月）にしてR6/R7を別系列で）
+const FY_MONTH_LABELS = ['4月','5月','6月','7月','8月','9月','10月','11月','12月','1月','2月','3月'];
+new Chart(document.getElementById('chartLodgeMonthly'), {
+  type:'bar',
+  data:{labels:FY_MONTH_LABELS,
+    datasets:[
+      {label:'R6年度（2024/4-2025/3）',data:LODGE_TORIHIKI.slice(0,12),backgroundColor:'#cbc4b4',borderRadius:3},
+      {label:'R7年度（2025/4-2026/3）',data:LODGE_TORIHIKI.slice(12,24),backgroundColor:'#8b1d3f',borderRadius:3}
+    ]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y.toLocaleString()+'万円'}}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v.toLocaleString()+'万'}}}}
+});
+
+new Chart(document.getElementById('chartLodgeJinpaku'), {
+  type:'line',
+  data:{labels:FY_MONTH_LABELS,
+    datasets:[
+      {label:'R6年度',data:LODGE_JINPAKU.slice(0,12),borderColor:'#94a3b8',backgroundColor:'#94a3b820',tension:0.3,borderWidth:2},
+      {label:'R7年度',data:LODGE_JINPAKU.slice(12,24),borderColor:'#8b1d3f',backgroundColor:'#8b1d3f20',tension:0.3,borderWidth:2.5,fill:true}
+    ]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y.toLocaleString()+'人'}}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v.toLocaleString()+'人'}}}}
+});
+
+new Chart(document.getElementById('chartLodgeTanka'), {
+  type:'line',
+  data:{labels:FY_MONTH_LABELS,
+    datasets:[
+      {label:'R6年度',data:LODGE_TANKA.slice(0,12),borderColor:'#94a3b8',tension:0.3,borderWidth:2},
+      {label:'R7年度',data:LODGE_TANKA.slice(12,24),borderColor:'#c9a96e',tension:0.3,borderWidth:2.5}
+    ]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y.toLocaleString()+'円'}}},scales:{y:{beginAtZero:false,ticks:{callback:v=>v.toLocaleString()+'円'}}}}
 });
 
 </script>
