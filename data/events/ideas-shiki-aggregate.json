@@ -1,13 +1,46 @@
 {
   "event_id": "shiki-aggregate",
   "event_name": "四季のまつり（春・夏・秋・冬の4イベント統合）",
-  "generated_at": "2026-05-10T00:05:24.539069+09:00",
+  "generated_at": "2026-05-12T15:00:00+09:00",
   "data_sources_used": [
     "sns",
     "camera",
     "lodging"
   ],
   "summary": "上杉まつり・水上花火・なせばなる秋まつり・雪灯篭まつりの4イベントを通年で運営。SNS反響では各祭りで異なるテーマが顕在化（春＝伝統行事への熱量、夏＝水面映え写真、秋＝鷹山公文化、冬＝幻想・神秘性）。共通課題はアクセス・防寒・運営。",
+  "lodging_context": {
+    "event_periods": [
+      {
+        "event": "上杉まつり (GW)",
+        "month": "2025-05",
+        "r7": {"torihiki_man": 5521, "jinpaku": 4959, "tanka_yen": 11133},
+        "r6": {"torihiki_man": 5234, "jinpaku": 4889, "tanka_yen": 10706},
+        "yoy_pct": {"torihiki": 5.5, "jinpaku": 1.4, "tanka": 4.0}
+      },
+      {
+        "event": "水上花火 (8月)",
+        "month": "2025-08",
+        "r7": {"torihiki_man": 7624, "jinpaku": 6664, "tanka_yen": 11440},
+        "r6": {"torihiki_man": 6149, "jinpaku": 5762, "tanka_yen": 10671},
+        "yoy_pct": {"torihiki": 24.0, "jinpaku": 15.7, "tanka": 7.2}
+      },
+      {
+        "event": "なせばなる秋 (9月)",
+        "month": "2025-09",
+        "r7": {"torihiki_man": 5511, "jinpaku": 4880, "tanka_yen": 11292},
+        "r6": {"torihiki_man": 5055, "jinpaku": 4892, "tanka_yen": 10334},
+        "yoy_pct": {"torihiki": 9.0, "jinpaku": -0.2, "tanka": 9.3}
+      },
+      {
+        "event": "雪灯篭 (2月)",
+        "month": "2026-02",
+        "r7": {"torihiki_man": 4265, "jinpaku": 3946, "tanka_yen": 10808},
+        "r6": {"torihiki_man": 3679, "jinpaku": 3522, "tanka_yen": 10446},
+        "yoy_pct": {"torihiki": 15.9, "jinpaku": 12.0, "tanka": 3.5}
+      }
+    ],
+    "insight": "8月の水上花火期は年間ピーク（人泊6,664）、雪灯篭月も人泊+12%と冬季の堅調回復。秋(9月)は人泊伸び悩み(-0.2%)で要テコ入れ。4祭り合計人泊数20,449人泊（年間総人泊の35%）を占める。"
+  },
   "ideas": [
     {
       "category": "shukyaku",
@@ -119,6 +152,28 @@
       ],
       "action": "機器メンテナンス完了、カメラB運用切替（道の駅米沢の前例参考）、復旧期限を2026年4月（春まつり前）に設定",
       "impact_text": "4祭りの定量評価精度大幅改善、PR施策の効果測定可能に",
+      "priority": "high"
+    },
+    {
+      "category": "shouhin",
+      "category_label": "商品開発",
+      "title": "四季のまつり 年間宿泊パスポート（4祭り連動）",
+      "evidence": [
+        {
+          "source": "lodging",
+          "data": "4祭り期月（5月・8月・9月・2月）の合計人泊数20,449人泊（R7）、年間人泊57,824の35%を占める基幹需要"
+        },
+        {
+          "source": "lodging",
+          "data": "夏(8月)+24%、冬(2月)+16%、GW+5%、秋+9% — 季節差はあるが全期間でR6を上回る成長。連動施策の素地あり"
+        },
+        {
+          "source": "analysis",
+          "data": "現状は各祭りごとに個別の宿泊・新幹線パッケージ。4祭り通しの「年間旅程」設計は未着手"
+        }
+      ],
+      "action": "4祭り（春・夏・秋・冬）のうち2回以上参加で割引が拡大する「米沢四季パスポート」¥5,000を発行。提携宿で10-20%割引、米沢牛ディナー1回無料、4祭り制覇で記念グッズ進呈",
+      "impact_text": "リピート率向上、年間2回以上来訪者+30%、4祭り合計人泊+8%（+1,636人泊）、平均単価+3%",
       "priority": "high"
     }
   ]
