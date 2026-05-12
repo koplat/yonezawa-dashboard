@@ -25,6 +25,9 @@ interface EventMeta {
   period_start_mmdd: string;
   period_end_mmdd: string;
   buffer_days: number;
+  main_day_mmdd: string;
+  weather_days_before?: number;
+  weather_days_after?: number;
 }
 
 interface FiscalYear {
@@ -32,10 +35,16 @@ interface FiscalYear {
   calendar_offset: number; // 0 for R6 (FY starts 2024), 1 for R7 (2025), ...
 }
 
+interface WeatherWindowPolicy {
+  days_before_main: number;
+  days_after_main: number;
+}
+
 interface MetaFile {
   location: { name: string; lat: number; lon: number; address: string; timezone: string };
   events: EventMeta[];
   fiscal_years: FiscalYear[];
+  weather_window_policy?: WeatherWindowPolicy;
 }
 
 interface Period {
@@ -98,22 +107,21 @@ function jstISOString(d: Date = new Date()): string {
   return jst.toISOString().slice(0, -1) + '+09:00';
 }
 
-function expandFiscalYears(ev: EventMeta, fiscalYears: FiscalYear[]): Period[] {
+function expandFiscalYears(ev: EventMeta, fiscalYears: FiscalYear[], policy: WeatherWindowPolicy): Period[] {
+  // 「本祭日 - N日 〜 本祭日 + M日」を取得（デフォルト N=7, M=0）
   // R6 fiscal year starts 2024-04. fiscal_years[i].calendar_offset adjusts from there.
-  const FY_BASE_YEAR = 2024; // R6 base
+  const FY_BASE_YEAR = 2024;
+  const daysBefore = ev.weather_days_before ?? policy.days_before_main;
+  const daysAfter = ev.weather_days_after ?? policy.days_after_main;
   const periods: Period[] = [];
+  const [mm, dd] = ev.main_day_mmdd.split('-').map(Number);
   for (const fy of fiscalYears) {
     const fyStartYear = FY_BASE_YEAR + fy.calendar_offset;
-    // For event months April-Dec, the event is in fyStartYear.
-    // For Jan-Mar, the event is in fyStartYear+1 (still within the fiscal year).
-    const calendarYear = ev.month >= 4 ? fyStartYear : fyStartYear + 1;
-    const [sm, sd] = ev.period_start_mmdd.split('-').map(Number);
-    const [em, ed] = ev.period_end_mmdd.split('-').map(Number);
-    const startDate = new Date(Date.UTC(calendarYear, sm - 1, sd));
-    const endDate = new Date(Date.UTC(calendarYear, em - 1, ed));
-    // Apply buffer
-    startDate.setUTCDate(startDate.getUTCDate() - ev.buffer_days);
-    endDate.setUTCDate(endDate.getUTCDate() + ev.buffer_days);
+    // 本祭日の月から年度内のカレンダー年を決める
+    const calendarYear = mm >= 4 ? fyStartYear : fyStartYear + 1;
+    const mainDate = new Date(Date.UTC(calendarYear, mm - 1, dd));
+    const startDate = new Date(mainDate.getTime() - daysBefore * 24 * 3600 * 1000);
+    const endDate = new Date(mainDate.getTime() + daysAfter * 24 * 3600 * 1000);
     const fmt = (d: Date) => d.toISOString().slice(0, 10);
     periods.push({ fiscal_year: fy.id, start: fmt(startDate), end: fmt(endDate) });
   }
@@ -161,27 +169,32 @@ async function sleep(ms: number) {
 }
 
 async function main() {
-  console.log('米沢イベント期間 天気データ取得開始');
+  console.log('米沢イベント天気データ取得開始（本祭日基準モード）');
   const meta: MetaFile = JSON.parse(readFileSync(META_PATH, 'utf-8'));
   const { lat, lon, timezone } = meta.location;
   const today = new Date();
+  const policy: WeatherWindowPolicy = meta.weather_window_policy ?? { days_before_main: 7, days_after_main: 0 };
 
   const result: any = {
     source: 'Open-Meteo Historical Weather API',
     api_url: API_BASE,
     location: meta.location,
     last_updated: jstISOString(today),
-    note: '各イベント期間±1日の日次気象データ。R8（2026年度）など未来期間は取得対象外（履歴APIのため）。',
+    window_policy: policy,
+    note: `各イベントの本祭日 ${policy.days_before_main}日前 〜 本祭日 ${policy.days_after_main}日後（合計 ${policy.days_before_main + policy.days_after_main + 1}日）の日次気象データ。未来期間は取得対象外。`,
     events: {} as Record<string, any>,
   };
 
   for (const ev of meta.events) {
     console.log(`\n[Event] ${ev.name} (${ev.id})`);
-    const periods = expandFiscalYears(ev, meta.fiscal_years);
+    const periods = expandFiscalYears(ev, meta.fiscal_years, policy);
+    const daysBefore = ev.weather_days_before ?? policy.days_before_main;
+    const daysAfter = ev.weather_days_after ?? policy.days_after_main;
     const eventOut: any = {
       event_name: ev.name,
-      core_period: { start_mmdd: ev.period_start_mmdd, end_mmdd: ev.period_end_mmdd },
-      buffer_days: ev.buffer_days,
+      main_day_mmdd: ev.main_day_mmdd,
+      window_days_before: daysBefore,
+      window_days_after: daysAfter,
       periods: [] as any[],
     };
     for (const p of periods) {
