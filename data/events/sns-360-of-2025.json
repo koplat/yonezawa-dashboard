@@ -1,0 +1,111 @@
+{
+  "event_id": "360-of-2025",
+  "event_name": "360°よねざわオープンファクトリー",
+  "event_name_short": "360°OF",
+  "tab_key": "factory",
+  "date_start": "2025-09-11",
+  "date_end": "2025-09-13",
+  "last_updated": "2026-05-11T07:21:24.988Z",
+  "posts_count": 11,
+  "impressions_estimated": 3000,
+  "sentiment_pct": 0,
+  "sentiment": {
+    "positive": 0,
+    "neutral": 11,
+    "negative": 0
+  },
+  "word_freq": [],
+  "hashtag_freq": [
+    [
+      "-",
+      11
+    ]
+  ],
+  "timeline": [
+    {
+      "date": "2025-09-08",
+      "count": 1
+    },
+    {
+      "date": "2025-09-09",
+      "count": 2
+    },
+    {
+      "date": "2025-09-10",
+      "count": 2
+    },
+    {
+      "date": "2025-09-11",
+      "count": 2
+    },
+    {
+      "date": "2025-09-12",
+      "count": 1
+    },
+    {
+      "date": "2025-09-13",
+      "count": 2
+    },
+    {
+      "date": "2025-09-18",
+      "count": 1
+    }
+  ],
+  "top_posts": [
+    {
+      "date": "2025-09-09",
+      "platform": "X",
+      "handle": "@okitama_hall",
+      "text": "-",
+      "likes": 8,
+      "reposts": 0,
+      "hashtags": [
+        "-"
+      ]
+    },
+    {
+      "date": "2025-09-11",
+      "platform": "X",
+      "handle": "@pZh8b9VqMvj54gS",
+      "text": "-",
+      "likes": 7,
+      "reposts": 0,
+      "hashtags": [
+        "-"
+      ]
+    },
+    {
+      "date": "2025-09-13",
+      "platform": "X",
+      "handle": "@toko_1597",
+      "text": "-",
+      "likes": 4,
+      "reposts": 0,
+      "hashtags": [
+        "-"
+      ]
+    },
+    {
+      "date": "2025-09-13",
+      "platform": "X",
+      "handle": "@pZh8b9VqMvj54gS",
+      "text": "-",
+      "likes": 3,
+      "reposts": 0,
+      "hashtags": [
+        "-"
+      ]
+    },
+    {
+      "date": "2025-09-18",
+      "platform": "X",
+      "handle": "@curtainhome",
+      "text": "-",
+      "likes": 2,
+      "reposts": 0,
+      "hashtags": [
+        "-"
+      ]
+    }
+  ]
+}

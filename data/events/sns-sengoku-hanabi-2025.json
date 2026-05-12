@@ -1,0 +1,111 @@
+{
+  "event_id": "sengoku-hanabi-2025",
+  "event_name": "よねざわ戦国花火大会",
+  "event_name_short": "戦国花火",
+  "tab_key": "sengoku",
+  "date_start": "2025-10-11",
+  "date_end": "2025-10-11",
+  "last_updated": "2026-05-11T07:21:31.263Z",
+  "posts_count": 30,
+  "impressions_estimated": 295200,
+  "sentiment_pct": 0,
+  "sentiment": {
+    "positive": 0,
+    "neutral": 30,
+    "negative": 0
+  },
+  "word_freq": [],
+  "hashtag_freq": [
+    [
+      "-",
+      30
+    ]
+  ],
+  "timeline": [
+    {
+      "date": "2025-10-09",
+      "count": 1
+    },
+    {
+      "date": "2025-10-10",
+      "count": 5
+    },
+    {
+      "date": "2025-10-11",
+      "count": 17
+    },
+    {
+      "date": "2025-10-12",
+      "count": 4
+    },
+    {
+      "date": "2025-10-15",
+      "count": 1
+    },
+    {
+      "date": "2025-10-18",
+      "count": 1
+    },
+    {
+      "date": "2025-10-20",
+      "count": 1
+    }
+  ],
+  "top_posts": [
+    {
+      "date": "2025-10-12",
+      "platform": "X",
+      "handle": "@kitekero_kun",
+      "text": "-",
+      "likes": 398,
+      "reposts": 0,
+      "hashtags": [
+        "-"
+      ]
+    },
+    {
+      "date": "2025-10-11",
+      "platform": "X",
+      "handle": "@hasekura6emon",
+      "text": "-",
+      "likes": 314,
+      "reposts": 0,
+      "hashtags": [
+        "-"
+      ]
+    },
+    {
+      "date": "2025-10-11",
+      "platform": "X",
+      "handle": "@kitekero_kun",
+      "text": "-",
+      "likes": 240,
+      "reposts": 0,
+      "hashtags": [
+        "-"
+      ]
+    },
+    {
+      "date": "2025-10-15",
+      "platform": "X",
+      "handle": "@NAOE_KANETSUGU7",
+      "text": "-",
+      "likes": 217,
+      "reposts": 0,
+      "hashtags": [
+        "-"
+      ]
+    },
+    {
+      "date": "2025-10-11",
+      "platform": "X",
+      "handle": "@ohwa_sby",
+      "text": "-",
+      "likes": 160,
+      "reposts": 0,
+      "hashtags": [
+        "-"
+      ]
+    }
+  ]
+}

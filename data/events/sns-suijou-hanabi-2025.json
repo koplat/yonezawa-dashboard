@@ -1,0 +1,80 @@
+{
+  "event_id": "suijou-hanabi-2025",
+  "event_name": "米沢納涼水上花火大会",
+  "event_name_short": "水上花火",
+  "tab_key": "suijou",
+  "date_start": "2025-08-08",
+  "date_end": "2025-08-08",
+  "last_updated": "2026-05-11T07:21:21.701Z",
+  "posts_count": 4,
+  "impressions_estimated": 18900,
+  "sentiment_pct": 0,
+  "sentiment": {
+    "positive": 0,
+    "neutral": 4,
+    "negative": 0
+  },
+  "word_freq": [],
+  "hashtag_freq": [
+    [
+      "-",
+      4
+    ]
+  ],
+  "timeline": [
+    {
+      "date": "2025-08-08",
+      "count": 3
+    },
+    {
+      "date": "2025-08-09",
+      "count": 1
+    }
+  ],
+  "top_posts": [
+    {
+      "date": "2025-08-08",
+      "platform": "X",
+      "handle": "@touhoku_maruhan",
+      "text": "-",
+      "likes": 66,
+      "reposts": 0,
+      "hashtags": [
+        "-"
+      ]
+    },
+    {
+      "date": "2025-08-08",
+      "platform": "X",
+      "handle": "@YUI_OKUDA_0108",
+      "text": "-",
+      "likes": 52,
+      "reposts": 0,
+      "hashtags": [
+        "-"
+      ]
+    },
+    {
+      "date": "2025-08-09",
+      "platform": "X",
+      "handle": "@YUI_OKUDA_0108",
+      "text": "-",
+      "likes": 37,
+      "reposts": 0,
+      "hashtags": [
+        "-"
+      ]
+    },
+    {
+      "date": "2025-08-08",
+      "platform": "X",
+      "handle": "@uesugi_museum",
+      "text": "-",
+      "likes": 34,
+      "reposts": 0,
+      "hashtags": [
+        "-"
+      ]
+    }
+  ]
+}

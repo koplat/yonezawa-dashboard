@@ -1,0 +1,111 @@
+{
+  "event_id": "uesugi-matsuri-2025",
+  "event_name": "米沢上杉まつり",
+  "event_name_short": "上杉まつり",
+  "tab_key": "uesugi",
+  "date_start": "2025-04-29",
+  "date_end": "2025-05-03",
+  "last_updated": "2026-05-11T07:21:17.717Z",
+  "posts_count": 30,
+  "impressions_estimated": 307200,
+  "sentiment_pct": 0,
+  "sentiment": {
+    "positive": 0,
+    "neutral": 30,
+    "negative": 0
+  },
+  "word_freq": [],
+  "hashtag_freq": [
+    [
+      "-",
+      30
+    ]
+  ],
+  "timeline": [
+    {
+      "date": "2025-04-28",
+      "count": 3
+    },
+    {
+      "date": "2025-04-29",
+      "count": 4
+    },
+    {
+      "date": "2025-04-30",
+      "count": 5
+    },
+    {
+      "date": "2025-05-02",
+      "count": 4
+    },
+    {
+      "date": "2025-05-03",
+      "count": 10
+    },
+    {
+      "date": "2025-05-04",
+      "count": 3
+    },
+    {
+      "date": "2025-05-05",
+      "count": 1
+    }
+  ],
+  "top_posts": [
+    {
+      "date": "2025-05-03",
+      "platform": "X",
+      "handle": "@jajagi7jajagi",
+      "text": "-",
+      "likes": 482,
+      "reposts": 0,
+      "hashtags": [
+        "-"
+      ]
+    },
+    {
+      "date": "2025-05-02",
+      "platform": "X",
+      "handle": "@uesugijoshien",
+      "text": "-",
+      "likes": 209,
+      "reposts": 0,
+      "hashtags": [
+        "-"
+      ]
+    },
+    {
+      "date": "2025-04-30",
+      "platform": "X",
+      "handle": "@kitekero_kun",
+      "text": "-",
+      "likes": 208,
+      "reposts": 0,
+      "hashtags": [
+        "-"
+      ]
+    },
+    {
+      "date": "2025-04-30",
+      "platform": "X",
+      "handle": "@kitekero_kun",
+      "text": "-",
+      "likes": 198,
+      "reposts": 0,
+      "hashtags": [
+        "-"
+      ]
+    },
+    {
+      "date": "2025-05-03",
+      "platform": "X",
+      "handle": "@jajagi7jajagi",
+      "text": "-",
+      "likes": 152,
+      "reposts": 0,
+      "hashtags": [
+        "-"
+      ]
+    }
+  ]
+}

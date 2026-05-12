@@ -1,0 +1,111 @@
+{
+  "event_id": "yukidouro-2026",
+  "event_name": "上杉雪灯篭まつり",
+  "event_name_short": "雪灯篭",
+  "tab_key": "yukidouro",
+  "date_start": "2026-02-14",
+  "date_end": "2026-02-15",
+  "last_updated": "2026-05-11T07:21:34.368Z",
+  "posts_count": 30,
+  "impressions_estimated": 192700,
+  "sentiment_pct": 0,
+  "sentiment": {
+    "positive": 0,
+    "neutral": 30,
+    "negative": 0
+  },
+  "word_freq": [],
+  "hashtag_freq": [
+    [
+      "-",
+      30
+    ]
+  ],
+  "timeline": [
+    {
+      "date": "2026-02-11",
+      "count": 1
+    },
+    {
+      "date": "2026-02-12",
+      "count": 1
+    },
+    {
+      "date": "2026-02-13",
+      "count": 7
+    },
+    {
+      "date": "2026-02-14",
+      "count": 6
+    },
+    {
+      "date": "2026-02-15",
+      "count": 8
+    },
+    {
+      "date": "2026-02-16",
+      "count": 6
+    },
+    {
+      "date": "2026-02-18",
+      "count": 1
+    }
+  ],
+  "top_posts": [
+    {
+      "date": "2026-02-11",
+      "platform": "X",
+      "handle": "@uesugijoshien",
+      "text": "-",
+      "likes": 322,
+      "reposts": 0,
+      "hashtags": [
+        "-"
+      ]
+    },
+    {
+      "date": "2026-02-13",
+      "platform": "X",
+      "handle": "@uesugijoshien",
+      "text": "-",
+      "likes": 193,
+      "reposts": 0,
+      "hashtags": [
+        "-"
+      ]
+    },
+    {
+      "date": "2026-02-13",
+      "platform": "X",
+      "handle": "@uesugijoshien",
+      "text": "-",
+      "likes": 190,
+      "reposts": 0,
+      "hashtags": [
+        "-"
+      ]
+    },
+    {
+      "date": "2026-02-14",
+      "platform": "X",
+      "handle": "@uesugijoshien",
+      "text": "-",
+      "likes": 142,
+      "reposts": 0,
+      "hashtags": [
+        "-"
+      ]
+    },
+    {
+      "date": "2026-02-13",
+      "platform": "X",
+      "handle": "@tuydosukoi",
+      "text": "-",
+      "likes": 139,
+      "reposts": 0,
+      "hashtags": [
+        "-"
+      ]
+    }
+  ]
+}
