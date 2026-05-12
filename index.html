@@ -2647,6 +2647,166 @@ new Chart(document.getElementById('chartLodgeTanka'), {
   }
 })();
 
+
+// =========== SNS JSON Real Data Loader（自動追加） ===========
+// data/events/sns-{event-id}.json をfetchしてSNS_DATAを実データで上書き、DUMMY DATAバナーを非表示化
+(function() {
+  const SNS_JSON_EVENT_MAP = {
+    'uesugi-matsuri-2025': 'uesugi',
+    'suijou-hanabi-2025': 'suijou',
+    '360-of-2025': 'factory',
+    'naseba-aki-2025': 'naseba',
+    'sengoku-hanabi-2025': 'sengoku',
+    'yukidouro-2026': 'yukidouro'
+  };
+
+  function mapJsonToSnsData(json) {
+    const sent = json.sentiment || {positive:0, neutral:0, negative:0};
+    const total = (sent.positive||0) + (sent.neutral||0) + (sent.negative||0);
+    const posPct = total > 0 ? Math.round((sent.positive / total) * 100) : 0;
+
+    let mood = 'mixed';
+    if (sent.positive > sent.negative && sent.positive > sent.neutral) mood = 'positive';
+    else if (sent.negative > sent.positive && sent.negative > sent.neutral) mood = 'negative';
+
+    const topPost = (json.top_posts || [])[0] || {};
+    const topEng = topPost.handle ? `${topPost.platform || 'X'} ${topPost.handle}` : '—';
+    const engCount = topPost.likes != null ? `いいね ${topPost.likes.toLocaleString()}` : '—';
+
+    const timeline = json.timeline || [];
+    const timelineCounts = timeline.map(t => t.count);
+    const timelineLabels = timeline.map(t => {
+      const d = new Date(t.date);
+      return `${d.getMonth() + 1}/${d.getDate()}`;
+    });
+
+    const period = (json.date_start && json.date_end) ?
+      `${json.date_start.replace(/-/g,'/')}〜${json.date_end.replace(/-/g,'/')}` : '—';
+
+    let sentText = '';
+    if (total === 0) {
+      sentText = 'データ未取得';
+    } else if (sent.neutral === total) {
+      sentText = '本文未収集のため感情判定未実施（投稿件数・拡散指標のみ集計）';
+    } else {
+      sentText = `ポジ${sent.positive} / 中立${sent.neutral} / ネガ${sent.negative}`;
+    }
+
+    return {
+      name: json.event_name || '—',
+      period: period,
+      posts: json.posts_count || 0,
+      imp: json.impressions_estimated || 0,
+      posPct: posPct,
+      posCnt: sent.positive || 0,
+      neuCnt: sent.neutral || 0,
+      negCnt: sent.negative || 0,
+      topEng: topEng,
+      engCount: engCount,
+      words: (json.word_freq && json.word_freq.length > 0) ? json.word_freq : [['（本文未収集）',1]],
+      hashtags: (json.hashtag_freq || []).filter(([tag]) => tag && tag !== '-'),
+      sentText: sentText,
+      timeline: timelineCounts,
+      timelineLabels: timelineLabels,
+      mood: mood,
+      positiveThemes: ['本文未収集のため定性分析未実施'],
+      negativeThemes: ['本文未収集のため定性分析未実施'],
+      notable: [
+        topPost.handle ? `${topPost.handle} の投稿が ${(topPost.likes||0).toLocaleString()}いいねで最も拡散` : '—',
+        `収集期間：${json.date_start || '—'}〜${json.date_end || '—'}（収集件数 ${json.posts_count || 0}件）`
+      ],
+      topPosts: (json.top_posts || []).slice(0, 5).map(p => ({
+        plat: p.platform || 'X',
+        handle: p.handle || '—',
+        text: (p.text && p.text !== '-') ? p.text : '（本文未収集）',
+        likes: p.likes || 0,
+        rt: p.reposts || 0
+      }))
+    };
+  }
+
+  async function loadRealSnsData() {
+    if (typeof SNS_DATA === 'undefined') return;
+    const eventIds = Object.keys(SNS_JSON_EVENT_MAP);
+    let loadedCount = 0;
+    const loadedTabKeys = [];
+    for (const eventId of eventIds) {
+      try {
+        const resp = await fetch(`data/events/sns-${eventId}.json?t=${Date.now()}`);
+        if (!resp.ok) continue;
+        const json = await resp.json();
+        const tabKey = SNS_JSON_EVENT_MAP[eventId];
+        SNS_DATA[tabKey] = mapJsonToSnsData(json);
+        loadedCount++;
+        loadedTabKeys.push(tabKey);
+      } catch (e) {
+        console.warn(`[SNS Loader] Failed to load sns-${eventId}.json:`, e);
+      }
+    }
+    if (loadedCount === 0) {
+      console.warn('[SNS Loader] No real SNS data loaded; keeping dummy values.');
+      return;
+    }
+    console.log(`[SNS Loader] Loaded ${loadedCount} event(s):`, loadedTabKeys);
+    // Hide SNS-specific DUMMY DATA banners (those mentioning /sns-update)
+    document.querySelectorAll('.dummy-banner').forEach(banner => {
+      if (banner.textContent.includes('/sns-update')) {
+        banner.style.display = 'none';
+      }
+    });
+    // Re-render visible SNS sections
+    if (typeof renderSnsBlock === 'function') {
+      // 四季のまつりタブ：現在activeなボタンがあれば再描画、なければデフォルトのuesugi
+      const shikiActiveBtn = document.querySelector('.shiki-sns-btn.active');
+      if (shikiActiveBtn) {
+        renderSnsBlock(shikiActiveBtn.dataset.event, 'shiki');
+      }
+      // 戦国花火タブ
+      renderSnsBlock('sengoku', 'sengoku');
+      // 360°OFタブ
+      renderSnsBlock('factory', 'factory');
+    }
+    // Update status dots and counts in the data source table
+    const statusMap = {
+      'uesugi-matsuri-2025': 'uesugi',
+      'suijou-hanabi-2025': 'suijou',
+      '360-of-2025': 'factory',
+      'naseba-aki-2025': 'naseba',
+      'sengoku-hanabi-2025': 'sengoku',
+      'yukidouro-2026': 'yukidouro'
+    };
+    document.querySelectorAll('tr').forEach(row => {
+      const cmdEl = row.querySelector('[data-copy^="/sns-update"]');
+      if (!cmdEl) return;
+      const eventId = cmdEl.dataset.copy.replace('/sns-update ', '').trim();
+      const tabKey = statusMap[eventId];
+      if (!tabKey || !SNS_DATA[tabKey]) return;
+      const data = SNS_DATA[tabKey];
+      const cells = row.querySelectorAll('td');
+      if (cells.length >= 5) {
+        // Status: 3rd cell (index 2)
+        const statusCell = cells[2];
+        const dot = statusCell.querySelector('.status-dot');
+        const label = statusCell.querySelector('.status-label');
+        if (dot) { dot.classList.remove('dummy'); dot.classList.add('real'); dot.style.background = '#3d6e4f'; }
+        if (label) label.textContent = '実データ';
+        // Posts count: 4th cell (index 3)
+        cells[3].textContent = `${data.posts}件`;
+        // Last updated: 5th cell (index 4) - use current date
+        const lastUpd = cells[4].querySelector('.status-label');
+        if (lastUpd) lastUpd.textContent = new Date().toISOString().slice(0, 10);
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadRealSnsData);
+  } else {
+    loadRealSnsData();
+  }
+})();
+
+
 </script>
 </body>
 </html>
