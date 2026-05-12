@@ -397,7 +397,7 @@ main{padding:40px 0 60px}
 </div>
 </div>
 <div class="year-nav" id="yearNav">
-<button class="year-btn" data-year="r6">R6 / 2024</button>
+<button class="year-btn" data-year="r6" style="display:none" title="R6データは年度比較用">R6 / 2024</button>
 <button class="year-btn active" data-year="r7">R7 / 2025</button>
 <button class="year-btn" data-year="r8" style="display:none" title="R8データ未取得">R8 / 2026</button>
 </div>
@@ -439,8 +439,8 @@ main{padding:40px 0 60px}
 <button class="tab" data-target="camera" data-year="r7">🎥 カメラ車両カウント</button>
 <button class="tab" data-target="locations" data-year="r7">📍 取得地点・エリア</button>
 <button class="tab" data-target="gw" data-year="r8" style="display:none">🌸 置賜GW人流</button>
-<button class="tab" data-target="lodging" data-year="r6,r7">🏨 宿泊データ（じゃらん）</button>
-<button class="tab" data-target="data" data-year="r6,r7">📋 データソース</button>
+<button class="tab" data-target="lodging" data-year="r7">🏨 宿泊データ（じゃらん）</button>
+<button class="tab" data-target="data" data-year="r7">📋 データソース</button>
 </div>
 </div>
 </div>
@@ -2254,7 +2254,13 @@ new Chart(document.getElementById('chartLodgeTanka'), {
       }
       const mainMmdd = mainDays[eventId];
       const isSnowEvent = eventId === 'yuki-doro';
-      const cards = event.periods.map(p => {
+      // R6を非表示化（年度比較は内部データとして保持、UIにはR7のみ表示）
+      const visiblePeriods = event.periods.filter(p => p.fiscal_year === 'R7');
+      if(!visiblePeriods.length){
+        container.innerHTML = '<div class="weather-empty">R7データ取得対象期間外</div>';
+        return;
+      }
+      const cards = visiblePeriods.map(p => {
         const main = mainMmdd ? findMainDay(p.daily, mainMmdd) : null;
         const sum = summarize(p.daily);
         if(!sum) return '';
@@ -2288,7 +2294,7 @@ new Chart(document.getElementById('chartLodgeTanka'), {
             </div>
           </div>`;
       }).join('');
-      const strips = event.periods.map(p => `
+      const strips = visiblePeriods.map(p => `
         <div class="weather-daystrip-row">
           <span class="weather-daystrip-row-label">${p.fiscal_year}:</span>
           ${p.daily.map(d => dayChip(d, mainMmdd, isSnowEvent)).join('')}
