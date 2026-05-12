@@ -27,6 +27,8 @@ Cowork（または通常のClaude.ai）に貼り付けて使う雛形。
 
 **入力データ**:
 - `lodging-annual.json` — じゃらん宿泊データ（R6+R7・24ヶ月分の月次データ＋年度サマリ）
+- `weather.json` — 各イベント期間±1日の日次気象データ（Open-Meteo Historical API）
+- `event-meta.json` — 各イベントの本祭日（`main_day_mmdd`）と期間定義
 - `sns-events-meta.json`（あれば）— SNS分析メタ情報
 - 既存の `ideas-[[EVENT_KEY]].json`（あれば差分更新の参考に）
 - 必要に応じてCoworkで Web 検索やドキュメント参照
@@ -39,6 +41,14 @@ Cowork（または通常のClaude.ai）に貼り付けて使う雛形。
    - `insight` フィールドで「この月の宿泊動向の特徴」を1〜2文に要約
    - 改善アイディアの最低 50% で `evidence` に `source: "lodging"` を含む項目を1件以上含める
    - `lodging-annual.json` の月次データを根拠として活用（例：「10月R7人泊数6,022（前年比+20%）」のように具体的数値）
+
+1.5. **天気観点を必ず含める**：
+   - `lodging_context` の直後に `weather_context` ブロックを置く（`event-meta.json` の `main_day_mmdd` を参照）
+   - 本祭日のR6/R7比較（最高/最低気温・天気ラベル・降水量・降雪量）を必ず数値で示す
+   - 期間サマリー（最高/最低平均・降水合計・雨の日 or 降雪合計）を含める
+   - `insight` で「天候差が顧客満足度・回遊・帰路混乱に与える影響」を考察
+   - 雨天/暖冬/雪不足/猛暑 等の異常天候が観測されている場合は **専用の improvement idea を1件追加**（カテゴリ：通常 `unei` か `manzoku`）
+   - その idea の `evidence` には必ず `source: "weather"` を含める
 
 2. **アイディアは6カテゴリーで網羅**：
    - `shukyaku`（集客向上）
