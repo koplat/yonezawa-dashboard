@@ -133,8 +133,14 @@ main{padding:28px 0 48px}
   transition:transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
 }
 .kpi-card:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,0,0,0.06);border-color:var(--accent)}
-.kpi-label{font-size:11px;color:var(--text-muted);margin-bottom:8px;letter-spacing:1px;font-weight:600;font-family:"Helvetica Neue",sans-serif;text-transform:uppercase}
+.kpi-card[data-real="true"]{border-left:3px solid var(--success)}
+.kpi-card[data-real="false"]{border-left:3px solid var(--gray-300)}
+.kpi-label{font-size:11px;color:var(--text-muted);margin-bottom:8px;letter-spacing:1px;font-weight:600;font-family:"Helvetica Neue",sans-serif;text-transform:uppercase;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .kpi-value{font-size:28px;font-weight:700;color:var(--secondary);line-height:1.1;font-family:"Hiragino Mincho ProN",serif;font-variant-numeric:tabular-nums}
+.kpi-source{font-size:10px;color:var(--text-muted);margin-top:6px;line-height:1.4;font-family:"Helvetica Neue",sans-serif;letter-spacing:0.3px}
+.data-badge{display:inline-block;padding:1px 7px;border-radius:8px;font-size:9px;font-weight:700;letter-spacing:0.5px;font-family:"Helvetica Neue",sans-serif;text-transform:uppercase;line-height:1.4}
+.data-badge.real{background:var(--success-bg);color:var(--success);border:1px solid var(--success)}
+.data-badge.dummy{background:var(--gray-100);color:var(--gray-700);border:1px solid var(--gray-300)}
 .kpi-unit{font-size:13px;font-weight:400;color:var(--text-muted);margin-left:4px;font-style:italic}
 .kpi-change{font-size:11.5px;margin-top:6px;font-weight:600;letter-spacing:0.5px;font-family:"Helvetica Neue",sans-serif}
 .kpi-change.up{color:#2d6a4f}
@@ -472,16 +478,16 @@ main{padding:28px 0 48px}
 <div class="section-lead">2025年度（R7）に米沢で開催された主要イベントの来場者・宿泊・車両通過の総括。実データ投入後に各KPIは自動更新されます。</div>
 </div>
 
-<div class="dummy-banner">
-<div class="dummy-banner-icon">⚠️</div>
-<div><strong>DUMMY DATA — ダミーデータ表示中</strong>　本タブのKPI・グラフはレイアウト確認用の仮値です。実データ投入後に確定値へ書き換えます。</div>
+<div class="partial-banner">
+<div class="partial-banner-icon">ℹ️</div>
+<div><strong>PARTIAL DATA — 一部実データ反映中</strong>　宿泊（じゃらん）・天気（Open-Meteo）は実データ。人流・車両・滞在時間は仮値（実データ投入後に確定値へ）。各KPIに <span class="data-badge real">REAL</span> / <span class="data-badge dummy">仮値</span> バッジで区別表示。</div>
 </div>
 
 <div class="kpi-grid">
-<div class="kpi-card"><div class="kpi-label">累計訪問者数 / 人流データ</div><div class="kpi-value">325,000<span class="kpi-unit">人</span></div><div class="kpi-change up">▲ 前年比 +12.4%</div></div>
-<div class="kpi-card"><div class="kpi-label">延べ宿泊者数 / Lodging</div><div class="kpi-value">28,400<span class="kpi-unit">人泊</span></div><div class="kpi-change up">▲ 前年比 +8.1%</div></div>
-<div class="kpi-card"><div class="kpi-label">訪問車両 / Camera</div><div class="kpi-value">87,200<span class="kpi-unit">台</span></div><div class="kpi-change up">▲ 前年比 +5.7%</div></div>
-<div class="kpi-card"><div class="kpi-label">平均滞在時間 / Dwell</div><div class="kpi-value">2.8<span class="kpi-unit">時間</span></div><div class="kpi-change down">▼ 前年比 -0.2h</div></div>
+<div class="kpi-card" data-real="false"><div class="kpi-label">累計訪問者数 / 人流データ <span class="data-badge dummy">仮値</span></div><div class="kpi-value">325,000<span class="kpi-unit">人</span></div><div class="kpi-change up">▲ 前年比 +12.4%</div></div>
+<div class="kpi-card" data-real="true"><div class="kpi-label">延べ宿泊者数 / Lodging <span class="data-badge real">REAL</span></div><div class="kpi-value" id="kpi-all-lodging">—<span class="kpi-unit">人泊</span></div><div class="kpi-change up" id="kpi-all-lodging-yoy">— 前年比</div><div class="kpi-source">出典：じゃらん年間データ（R7・12ヶ月計）</div></div>
+<div class="kpi-card" data-real="false"><div class="kpi-label">訪問車両 / Camera <span class="data-badge dummy">仮値</span></div><div class="kpi-value">87,200<span class="kpi-unit">台</span></div><div class="kpi-change up">▲ 前年比 +5.7%</div></div>
+<div class="kpi-card" data-real="false"><div class="kpi-label">平均滞在時間 / Dwell <span class="data-badge dummy">仮値</span></div><div class="kpi-value">2.8<span class="kpi-unit">時間</span></div><div class="kpi-change down">▼ 前年比 -0.2h</div></div>
 </div>
 
 <!-- 主要イベント天候ハイライト（JS で weather.json から自動生成） -->
@@ -2207,6 +2213,25 @@ const LODGE_MONTHS = ['24/04','24/05','24/06','24/07','24/08','24/09','24/10','2
 const LODGE_TORIHIKI = [3916,5234,4905,4256,6149,5055,5385,5444,4154,3615,3679,4140,4274,5521,5486,5216,7624,5511,6872,6233,4618,4132,4265,4630];
 const LODGE_JINPAKU = [3880,4889,4660,4263,5762,4892,5018,5147,3910,3300,3522,3941,4161,4959,5195,4666,6664,4880,6022,5358,4058,3460,3946,4455];
 const LODGE_TANKA = [10094,10706,10526,9983,10671,10334,10731,10578,10625,10956,10446,10505,10273,11133,10561,11178,11440,11292,11412,11633,11380,11942,10808,10393];
+
+// 全体サマリータブの "延べ宿泊者数" KPI を実データで上書き
+(function injectLodgingKpi(){
+  const sum = arr => arr.reduce((a,b) => a + b, 0);
+  const r6Total = sum(LODGE_JINPAKU.slice(0,12));
+  const r7Total = sum(LODGE_JINPAKU.slice(12,24));
+  const yoyPct = ((r7Total - r6Total) / r6Total) * 100;
+  const valueEl = document.getElementById('kpi-all-lodging');
+  const yoyEl = document.getElementById('kpi-all-lodging-yoy');
+  if(valueEl){
+    valueEl.innerHTML = r7Total.toLocaleString() + '<span class="kpi-unit">人泊</span>';
+  }
+  if(yoyEl){
+    const sign = yoyPct >= 0 ? '▲' : '▼';
+    const cls = yoyPct >= 0 ? 'up' : 'down';
+    yoyEl.className = 'kpi-change ' + cls;
+    yoyEl.textContent = `${sign} 前年比 ${yoyPct >= 0 ? '+' : ''}${yoyPct.toFixed(1)}%（R6: ${r6Total.toLocaleString()}人泊）`;
+  }
+})();
 
 // 月別比較：R6 vs R7（X軸を月（4-3月）にしてR6/R7を別系列で）
 const FY_MONTH_LABELS = ['4月','5月','6月','7月','8月','9月','10月','11月','12月','1月','2月','3月'];
