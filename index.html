@@ -141,6 +141,25 @@ main{padding:28px 0 48px}
 .data-badge{display:inline-block;padding:1px 7px;border-radius:8px;font-size:9px;font-weight:700;letter-spacing:0.5px;font-family:"Helvetica Neue",sans-serif;text-transform:uppercase;line-height:1.4}
 .data-badge.real{background:var(--success-bg);color:var(--success);border:1px solid var(--success)}
 .data-badge.dummy{background:var(--gray-100);color:var(--gray-700);border:1px solid var(--gray-300)}
+/* Lodging context strip: per-event tab で月次じゃらん実績を表示 */
+.lodging-ctx{background:linear-gradient(135deg,#fdfaf4 0%,#f5efe2 100%);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:8px;padding:12px 16px;margin-bottom:14px;display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center}
+@media(max-width:768px){.lodging-ctx{grid-template-columns:1fr;text-align:left}}
+.lodging-ctx-icon{font-size:24px;line-height:1;flex-shrink:0}
+.lodging-ctx-body{display:flex;flex-direction:column;gap:2px;min-width:0}
+.lodging-ctx-label{font-size:10.5px;color:var(--text-muted);font-weight:700;letter-spacing:1px;font-family:"Helvetica Neue",sans-serif;text-transform:uppercase}
+.lodging-ctx-main{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;line-height:1.2}
+.lodging-ctx-value{font-size:20px;font-weight:700;color:var(--text);font-variant-numeric:tabular-nums;font-family:"Hiragino Mincho ProN",serif}
+.lodging-ctx-unit{font-size:11px;color:var(--text-muted);font-weight:400}
+.lodging-ctx-yoy{font-size:12.5px;font-weight:700;letter-spacing:0.3px;font-family:"Helvetica Neue",sans-serif;font-variant-numeric:tabular-nums}
+.lodging-ctx-yoy.up{color:var(--success)}
+.lodging-ctx-yoy.down{color:var(--danger)}
+.lodging-ctx-meta{font-size:10.5px;color:var(--text-muted);font-family:"Helvetica Neue",sans-serif;letter-spacing:0.3px;margin-top:1px}
+.lodging-ctx-spark{width:140px;height:38px}
+@media(max-width:768px){.lodging-ctx-spark{width:100%;max-width:280px;height:34px;margin-top:4px}}
+.lodging-ctx-subevent{font-size:11px;font-weight:700;color:var(--secondary);margin-bottom:4px;font-family:"Hiragino Mincho ProN",serif}
+/* Reusable sparkline canvas */
+.kpi-sparkline{margin-top:6px;height:28px;width:100%;max-width:200px}
+.kpi-sparkline svg{display:block;width:100%;height:100%}
 .kpi-unit{font-size:13px;font-weight:400;color:var(--text-muted);margin-left:4px;font-style:italic}
 .kpi-change{font-size:11.5px;margin-top:6px;font-weight:600;letter-spacing:0.5px;font-family:"Helvetica Neue",sans-serif}
 .kpi-change.up{color:#2d6a4f}
@@ -485,7 +504,7 @@ main{padding:28px 0 48px}
 
 <div class="kpi-grid">
 <div class="kpi-card" data-real="false"><div class="kpi-label">累計訪問者数 / 人流データ <span class="data-badge dummy">仮値</span></div><div class="kpi-value">325,000<span class="kpi-unit">人</span></div><div class="kpi-change up">▲ 前年比 +12.4%</div></div>
-<div class="kpi-card" data-real="true"><div class="kpi-label">延べ宿泊者数 / Lodging <span class="data-badge real">REAL</span></div><div class="kpi-value" id="kpi-all-lodging">—<span class="kpi-unit">人泊</span></div><div class="kpi-change up" id="kpi-all-lodging-yoy">— 前年比</div><div class="kpi-source">出典：じゃらん年間データ（R7・12ヶ月計）</div></div>
+<div class="kpi-card" data-real="true"><div class="kpi-label">延べ宿泊者数 / Lodging <span class="data-badge real">REAL</span></div><div class="kpi-value" id="kpi-all-lodging">—<span class="kpi-unit">人泊</span></div><div class="kpi-change up" id="kpi-all-lodging-yoy">— 前年比</div><div class="kpi-sparkline" id="sparkline-all-lodging"></div><div class="kpi-source">出典：じゃらん年間データ（R7・12ヶ月計）</div></div>
 <div class="kpi-card" data-real="false"><div class="kpi-label">訪問車両 / Camera <span class="data-badge dummy">仮値</span></div><div class="kpi-value">87,200<span class="kpi-unit">台</span></div><div class="kpi-change up">▲ 前年比 +5.7%</div></div>
 <div class="kpi-card" data-real="false"><div class="kpi-label">平均滞在時間 / Dwell <span class="data-badge dummy">仮値</span></div><div class="kpi-value">2.8<span class="kpi-unit">時間</span></div><div class="kpi-change down">▼ 前年比 -0.2h</div></div>
 </div>
@@ -614,6 +633,8 @@ main{padding:28px 0 48px}
 <div id="weather-shiki-yuki-doro"></div>
 </div>
 
+<div id="lodging-ctx-shiki"></div>
+
 <div class="dummy-banner">
 <div class="dummy-banner-icon">⚠️</div>
 <div><strong>DUMMY DATA — ダミーデータ表示中</strong>　本タブのKPI・グラフはレイアウト確認用の仮値です。実データ投入後に確定値へ書き換えます。</div>
@@ -725,6 +746,8 @@ main{padding:28px 0 48px}
 <div id="weather-sengoku"><div class="weather-empty">読み込み中…</div></div>
 </div>
 
+<div id="lodging-ctx-sengoku"></div>
+
 <div class="dummy-banner">
 <div class="dummy-banner-icon">⚠️</div>
 <div><strong>DUMMY DATA — ダミーデータ表示中</strong>　本タブのKPI・グラフはレイアウト確認用の仮値です。実データ投入後に確定値へ書き換えます。</div>
@@ -828,6 +851,8 @@ main{padding:28px 0 48px}
 <div class="weather-section-desc">出典：Open-Meteo Historical Weather API ／ 観測地：米沢市 ／ メインデー9/13（土）と期間全体の気象をR6/R7で比較</div>
 <div id="weather-factory"><div class="weather-empty">読み込み中…</div></div>
 </div>
+
+<div id="lodging-ctx-factory"></div>
 
 <div class="partial-banner">
 <div class="partial-banner-icon">ℹ️</div>
@@ -2214,7 +2239,29 @@ const LODGE_TORIHIKI = [3916,5234,4905,4256,6149,5055,5385,5444,4154,3615,3679,4
 const LODGE_JINPAKU = [3880,4889,4660,4263,5762,4892,5018,5147,3910,3300,3522,3941,4161,4959,5195,4666,6664,4880,6022,5358,4058,3460,3946,4455];
 const LODGE_TANKA = [10094,10706,10526,9983,10671,10334,10731,10578,10625,10956,10446,10505,10273,11133,10561,11178,11440,11292,11412,11633,11380,11942,10808,10393];
 
-// 全体サマリータブの "延べ宿泊者数" KPI を実データで上書き
+// SVGスパークライン（小さな折れ線・面塗り・指定点をハイライト）
+function svgSparkline(data, opts){
+  const o = Object.assign({width:140, height:38, lineColor:COLORS.chart1, areaAlpha:'18', markIndex:null, markColor:COLORS.accent}, opts || {});
+  const min = Math.min(...data), max = Math.max(...data);
+  const range = (max - min) || 1;
+  const pad = 3;
+  const w = o.width, h = o.height;
+  const xs = data.map((_,i) => pad + (i/(data.length-1)) * (w - 2*pad));
+  const ys = data.map(v => h - pad - ((v - min)/range) * (h - 2*pad));
+  const linePath = `M ${xs[0].toFixed(1)} ${ys[0].toFixed(1)} ` + xs.slice(1).map((x,i) => `L ${x.toFixed(1)} ${ys[i+1].toFixed(1)}`).join(' ');
+  const areaPath = linePath + ` L ${xs[xs.length-1].toFixed(1)} ${h} L ${xs[0].toFixed(1)} ${h} Z`;
+  let markEl = '';
+  if(o.markIndex != null && o.markIndex >= 0 && o.markIndex < xs.length){
+    markEl = `<circle cx="${xs[o.markIndex].toFixed(1)}" cy="${ys[o.markIndex].toFixed(1)}" r="3.5" fill="${o.markColor}" stroke="#fff" stroke-width="1.5" />`;
+  }
+  return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="${areaPath}" fill="${o.lineColor}${o.areaAlpha}" stroke="none"/>
+    <path d="${linePath}" fill="none" stroke="${o.lineColor}" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+    ${markEl}
+  </svg>`;
+}
+
+// 全体サマリータブの "延べ宿泊者数" KPI を実データで上書き + スパークライン
 (function injectLodgingKpi(){
   const sum = arr => arr.reduce((a,b) => a + b, 0);
   const r6Total = sum(LODGE_JINPAKU.slice(0,12));
@@ -2222,6 +2269,7 @@ const LODGE_TANKA = [10094,10706,10526,9983,10671,10334,10731,10578,10625,10956,
   const yoyPct = ((r7Total - r6Total) / r6Total) * 100;
   const valueEl = document.getElementById('kpi-all-lodging');
   const yoyEl = document.getElementById('kpi-all-lodging-yoy');
+  const sparkEl = document.getElementById('sparkline-all-lodging');
   if(valueEl){
     valueEl.innerHTML = r7Total.toLocaleString() + '<span class="kpi-unit">人泊</span>';
   }
@@ -2230,6 +2278,78 @@ const LODGE_TANKA = [10094,10706,10526,9983,10671,10334,10731,10578,10625,10956,
     const cls = yoyPct >= 0 ? 'up' : 'down';
     yoyEl.className = 'kpi-change ' + cls;
     yoyEl.textContent = `${sign} 前年比 ${yoyPct >= 0 ? '+' : ''}${yoyPct.toFixed(1)}%（R6: ${r6Total.toLocaleString()}人泊）`;
+  }
+  if(sparkEl){
+    sparkEl.innerHTML = svgSparkline(LODGE_JINPAKU.slice(12,24), {width:200, height:30, lineColor:COLORS.chart1, areaAlpha:'15'});
+    sparkEl.setAttribute('title','R7年度 月次人泊数推移（4月→3月）');
+  }
+})();
+
+// 各イベントタブに月次じゃらん実績ストリップを注入
+(function injectEventLodgingContext(){
+  // 月インデックス: R7開始(0=2024-04)からの通算。R7は12..23
+  const EVENT_MONTHS = {
+    'uesugi-matsuri':   { label:'上杉まつり',   monthLabel:'5月',  monthIdxR7:13 }, // 2025-05
+    'mizukami-hanabi':  { label:'水上花火',     monthLabel:'8月',  monthIdxR7:16 }, // 2025-08
+    'factory-360':      { label:'360°OF',     monthLabel:'9月',  monthIdxR7:17 }, // 2025-09
+    'sengoku-hanabi':   { label:'戦国花火',     monthLabel:'10月', monthIdxR7:18 }, // 2025-10
+    'yuki-doro':        { label:'雪灯篭',       monthLabel:'2月',  monthIdxR7:22 }  // 2026-02
+  };
+
+  function buildStrip(eventId, opts){
+    const meta = EVENT_MONTHS[eventId];
+    if(!meta) return '';
+    const idxR7 = meta.monthIdxR7;
+    const idxR6 = idxR7 - 12; // 同月のR6
+    const r7Jinpaku = LODGE_JINPAKU[idxR7];
+    const r6Jinpaku = LODGE_JINPAKU[idxR6];
+    const r7Torihiki = LODGE_TORIHIKI[idxR7];
+    const r6Torihiki = LODGE_TORIHIKI[idxR6];
+    const r7Tanka = LODGE_TANKA[idxR7];
+    const r6Tanka = LODGE_TANKA[idxR6];
+    const yoyJin = ((r7Jinpaku - r6Jinpaku) / r6Jinpaku) * 100;
+    const yoyTor = ((r7Torihiki - r6Torihiki) / r6Torihiki) * 100;
+    const yoyTan = ((r7Tanka - r6Tanka) / r6Tanka) * 100;
+    const sign = v => v >= 0 ? '▲' : '▼';
+    const cls = v => v >= 0 ? 'up' : 'down';
+    const fmtPct = v => `${v >= 0 ? '+' : ''}${v.toFixed(1)}%`;
+    // R7 12ヶ月分のスパークライン、当該月をハイライト
+    const r7Data = LODGE_JINPAKU.slice(12, 24);
+    const markIdx = idxR7 - 12;
+    const subevent = opts && opts.subevent ? `<div class="lodging-ctx-subevent">${opts.subevent}</div>` : '';
+    return `
+      <div class="lodging-ctx">
+        ${subevent}
+        <div class="lodging-ctx-icon">🏨</div>
+        <div class="lodging-ctx-body">
+          <div class="lodging-ctx-label">じゃらん宿泊実績 <span class="data-badge real">REAL</span> ／ ${meta.monthLabel} R7</div>
+          <div class="lodging-ctx-main">
+            <span class="lodging-ctx-value">${r7Jinpaku.toLocaleString()}<span class="lodging-ctx-unit"> 人泊</span></span>
+            <span class="lodging-ctx-yoy ${cls(yoyJin)}">${sign(yoyJin)} ${fmtPct(yoyJin)} (R6: ${r6Jinpaku.toLocaleString()})</span>
+          </div>
+          <div class="lodging-ctx-meta">
+            取扱額 <strong>${r7Torihiki.toLocaleString()}万円</strong> (<span class="lodging-ctx-yoy ${cls(yoyTor)}" style="font-size:10.5px">${sign(yoyTor)} ${fmtPct(yoyTor)}</span>)
+            ／ 単価 <strong>${r7Tanka.toLocaleString()}円</strong> (<span class="lodging-ctx-yoy ${cls(yoyTan)}" style="font-size:10.5px">${sign(yoyTan)} ${fmtPct(yoyTan)}</span>)
+            ／ 出典：じゃらんエリアダッシュボード
+          </div>
+        </div>
+        <div class="lodging-ctx-spark" title="R7 12ヶ月人泊推移（★=${meta.monthLabel}）">${svgSparkline(r7Data, {width:140, height:38, lineColor:COLORS.chart1, areaAlpha:'18', markIndex:markIdx, markColor:COLORS.accent})}</div>
+      </div>`;
+  }
+
+  // 単発イベント
+  const sengokuEl = document.getElementById('lodging-ctx-sengoku');
+  if(sengokuEl) sengokuEl.innerHTML = buildStrip('sengoku-hanabi');
+  const factoryEl = document.getElementById('lodging-ctx-factory');
+  if(factoryEl) factoryEl.innerHTML = buildStrip('factory-360');
+
+  // 四季のまつり: 3イベント
+  const shikiEl = document.getElementById('lodging-ctx-shiki');
+  if(shikiEl){
+    shikiEl.innerHTML = ''
+      + buildStrip('uesugi-matsuri',   {subevent:'🌸 上杉まつり（5月実績）'})
+      + buildStrip('mizukami-hanabi',  {subevent:'🎆 水上花火（8月実績）'})
+      + buildStrip('yuki-doro',        {subevent:'❄️ 雪灯篭まつり（2月実績）'});
   }
 })();
 
