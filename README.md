@@ -91,10 +91,19 @@ npm run sns-process -- --event sengoku-hanabi-2025
 git add . && git commit -m "chore: 戦国花火 SNS反響更新" && git push
 ```
 
-## Netlify公開
+## 公開先
 
-- Netlify Drop に zip をドラッグ&ドロップで即公開
-- または GitHub連携で main ブランチへの push を自動デプロイ
+### GitHub Pages（メイン・無料）
+
+- **URL**: https://koplat.github.io/yonezawa-dashboard/
+- `.github/workflows/pages.yml` が main への push 毎に自動デプロイ
+- 初回有効化：リポジトリ Settings → Pages → Source を **"GitHub Actions"** に設定
+
+### Netlify（代替・必要に応じて）
+
+- `netlify.toml` の設定でセキュリティヘッダー等が効く
+- 過去の URL: `https://sparkly-kashata-f63e66.netlify.app/`
+- Netlify Drop に zip ドラッグ&ドロップでも公開可能
 
 ## ライセンス
 
