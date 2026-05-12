@@ -1,0 +1,55 @@
+{
+  "location": {
+    "name": "米沢市",
+    "lat": 37.9101,
+    "lon": 140.1167,
+    "address": "山形県米沢市",
+    "timezone": "Asia/Tokyo"
+  },
+  "events": [
+    {
+      "id": "uesugi-matsuri",
+      "name": "上杉まつり",
+      "month": 5,
+      "period_start_mmdd": "04-26",
+      "period_end_mmdd": "05-05",
+      "buffer_days": 1
+    },
+    {
+      "id": "mizukami-hanabi",
+      "name": "水上花火大会",
+      "month": 8,
+      "period_start_mmdd": "08-05",
+      "period_end_mmdd": "08-11",
+      "buffer_days": 1
+    },
+    {
+      "id": "factory-360",
+      "name": "360°オープンファクトリー",
+      "month": 9,
+      "period_start_mmdd": "09-08",
+      "period_end_mmdd": "09-15",
+      "buffer_days": 1
+    },
+    {
+      "id": "sengoku-hanabi",
+      "name": "よねざわ戦国花火大会",
+      "month": 10,
+      "period_start_mmdd": "10-08",
+      "period_end_mmdd": "10-14",
+      "buffer_days": 1
+    },
+    {
+      "id": "yuki-doro",
+      "name": "雪灯篭まつり",
+      "month": 2,
+      "period_start_mmdd": "02-12",
+      "period_end_mmdd": "02-17",
+      "buffer_days": 1
+    }
+  ],
+  "fiscal_years": [
+    { "id": "R6", "calendar_offset": 0 },
+    { "id": "R7", "calendar_offset": 1 }
+  ]
+}

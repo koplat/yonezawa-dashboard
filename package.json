@@ -8,7 +8,8 @@
     "ingest:dry": "tsx scripts/ingest.ts --dry-run",
     "validate": "tsx scripts/validate.ts",
     "serve": "npx http-server -p 8080 -c-1 .",
-    "sns-process": "tsx scripts/sns-process.ts"
+    "sns-process": "tsx scripts/sns-process.ts",
+    "fetch:weather": "tsx scripts/fetch-weather.ts"
   },
   "devDependencies": {
     "csv-parse": "^5.5.6",
