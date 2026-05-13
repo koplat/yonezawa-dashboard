@@ -2298,11 +2298,11 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// =========== 宿泊年間推移（R6+R7・24ヶ月） ===========
-const LODGE_MONTHS = ['24/04','24/05','24/06','24/07','24/08','24/09','24/10','24/11','24/12','25/01','25/02','25/03','25/04','25/05','25/06','25/07','25/08','25/09','25/10','25/11','25/12','26/01','26/02','26/03'];
-const LODGE_TORIHIKI = [3916,5234,4905,4256,6149,5055,5385,5444,4154,3615,3679,4140,4274,5521,5486,5216,7624,5511,6872,6233,4618,4132,4265,4630];
-const LODGE_JINPAKU = [3880,4889,4660,4263,5762,4892,5018,5147,3910,3300,3522,3941,4161,4959,5195,4666,6664,4880,6022,5358,4058,3460,3946,4455];
-const LODGE_TANKA = [10094,10706,10526,9983,10671,10334,10731,10578,10625,10956,10446,10505,10273,11133,10561,11178,11440,11292,11412,11633,11380,11942,10808,10393];
+// =========== 宿泊年間推移（R6+R7・24ヶ月）— data/events/lodging-annual.json から読込 ===========
+let LODGE_MONTHS = [];
+let LODGE_TORIHIKI = [];
+let LODGE_JINPAKU = [];
+let LODGE_TANKA = [];
 
 // SVGスパークライン（小さな折れ線・面塗り・指定点をハイライト）
 function svgSparkline(data, opts){
@@ -2327,7 +2327,7 @@ function svgSparkline(data, opts){
 }
 
 // 全体サマリータブの "延べ宿泊者数" KPI を実データで上書き + スパークライン
-(function injectLodgingKpi(){
+function injectLodgingKpi(){
   const sum = arr => arr.reduce((a,b) => a + b, 0);
   const r6Total = sum(LODGE_JINPAKU.slice(0,12));
   const r7Total = sum(LODGE_JINPAKU.slice(12,24));
@@ -2348,10 +2348,10 @@ function svgSparkline(data, opts){
     sparkEl.innerHTML = svgSparkline(LODGE_JINPAKU.slice(12,24), {width:200, height:30, lineColor:COLORS.chart1, areaAlpha:'15'});
     sparkEl.setAttribute('title','R7年度 月次人泊数推移（4月→3月）');
   }
-})();
+}
 
 // 各イベントタブに月次じゃらん実績ストリップを注入
-(function injectEventLodgingContext(){
+function injectEventLodgingContext(){
   // 月インデックス: R7開始(0=2024-04)からの通算。R7は12..23
   const EVENT_MONTHS = {
     'uesugi-matsuri':   { label:'上杉まつり',   monthLabel:'5月',  monthIdxR7:13 }, // 2025-05
@@ -2416,39 +2416,60 @@ function svgSparkline(data, opts){
       + buildStrip('mizukami-hanabi',  {subevent:'🎆 水上花火（8月実績）'})
       + buildStrip('yuki-doro',        {subevent:'❄️ 雪灯篭まつり（2月実績）'});
   }
-})();
+}
 
 // 月別比較：R6 vs R7（X軸を月（4-3月）にしてR6/R7を別系列で）
 const FY_MONTH_LABELS = ['4月','5月','6月','7月','8月','9月','10月','11月','12月','1月','2月','3月'];
-new Chart(document.getElementById('chartLodgeMonthly'), {
-  type:'bar',
-  data:{labels:FY_MONTH_LABELS,
-    datasets:[
-      {label:'R6年度（2024/4-2025/3）',data:LODGE_TORIHIKI.slice(0,12),backgroundColor:COLORS.r6,borderRadius:3},
-      {label:'R7年度（2025/4-2026/3）',data:LODGE_TORIHIKI.slice(12,24),backgroundColor:COLORS.r7,borderRadius:3}
-    ]},
-  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y.toLocaleString()+'万円'}}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v.toLocaleString()+'万'}}}}
-});
 
-new Chart(document.getElementById('chartLodgeJinpaku'), {
-  type:'line',
-  data:{labels:FY_MONTH_LABELS,
-    datasets:[
-      {label:'R6年度',data:LODGE_JINPAKU.slice(0,12),borderColor:COLORS.r6,backgroundColor:alpha(COLORS.r6,'20'),tension:0.3,borderWidth:2},
-      {label:'R7年度',data:LODGE_JINPAKU.slice(12,24),borderColor:COLORS.r7,backgroundColor:alpha(COLORS.r7,'20'),tension:0.3,borderWidth:2.5,fill:true}
-    ]},
-  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y.toLocaleString()+'人'}}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v.toLocaleString()+'人'}}}}
-});
+// lodging-annual.json を fetch → LODGE_* を populate → KPI / context / 3チャート を生成
+(async function initLodgingAnnual(){
+  try {
+    const res = await fetch('data/events/lodging-annual.json');
+    if(!res.ok) throw new Error('lodging-annual.json fetch failed: ' + res.status);
+    const json = await res.json();
+    // "2024-04" -> "24/04" 形式に変換
+    LODGE_MONTHS   = json.monthly.map(m => m.month.slice(2).replace('-','/'));
+    LODGE_TORIHIKI = json.monthly.map(m => m.torihiki_man);
+    LODGE_JINPAKU  = json.monthly.map(m => m.jinpaku);
+    LODGE_TANKA    = json.monthly.map(m => m.tanka_yen);
+  } catch (e) {
+    console.error('[lodging-annual] fetch error:', e);
+    return;
+  }
 
-new Chart(document.getElementById('chartLodgeTanka'), {
-  type:'line',
-  data:{labels:FY_MONTH_LABELS,
-    datasets:[
-      {label:'R6年度',data:LODGE_TANKA.slice(0,12),borderColor:COLORS.r6,tension:0.3,borderWidth:2},
-      {label:'R7年度',data:LODGE_TANKA.slice(12,24),borderColor:COLORS.r7,tension:0.3,borderWidth:2.5}
-    ]},
-  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y.toLocaleString()+'円'}}},scales:{y:{beginAtZero:false,ticks:{callback:v=>v.toLocaleString()+'円'}}}}
-});
+  injectLodgingKpi();
+  injectEventLodgingContext();
+
+  new Chart(document.getElementById('chartLodgeMonthly'), {
+    type:'bar',
+    data:{labels:FY_MONTH_LABELS,
+      datasets:[
+        {label:'R6年度（2024/4-2025/3）',data:LODGE_TORIHIKI.slice(0,12),backgroundColor:COLORS.r6,borderRadius:3},
+        {label:'R7年度（2025/4-2026/3）',data:LODGE_TORIHIKI.slice(12,24),backgroundColor:COLORS.r7,borderRadius:3}
+      ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y.toLocaleString()+'万円'}}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v.toLocaleString()+'万'}}}}
+  });
+
+  new Chart(document.getElementById('chartLodgeJinpaku'), {
+    type:'line',
+    data:{labels:FY_MONTH_LABELS,
+      datasets:[
+        {label:'R6年度',data:LODGE_JINPAKU.slice(0,12),borderColor:COLORS.r6,backgroundColor:alpha(COLORS.r6,'20'),tension:0.3,borderWidth:2},
+        {label:'R7年度',data:LODGE_JINPAKU.slice(12,24),borderColor:COLORS.r7,backgroundColor:alpha(COLORS.r7,'20'),tension:0.3,borderWidth:2.5,fill:true}
+      ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y.toLocaleString()+'人'}}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v.toLocaleString()+'人'}}}}
+  });
+
+  new Chart(document.getElementById('chartLodgeTanka'), {
+    type:'line',
+    data:{labels:FY_MONTH_LABELS,
+      datasets:[
+        {label:'R6年度',data:LODGE_TANKA.slice(0,12),borderColor:COLORS.r6,tension:0.3,borderWidth:2},
+        {label:'R7年度',data:LODGE_TANKA.slice(12,24),borderColor:COLORS.r7,tension:0.3,borderWidth:2.5}
+      ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y.toLocaleString()+'円'}}},scales:{y:{beginAtZero:false,ticks:{callback:v=>v.toLocaleString()+'円'}}}}
+  });
+})();
 
 // =========== 天気データ表示（Open-Meteo Historical / Phase ε） ===========
 (async function initWeather(){
