@@ -1,0 +1,4 @@
+day,weekday,area_id,area_name,population,weather,high_temperature,low_temperature
+20250911,木,9539342a-9cc3-4fe8-911f-d198b54f8717,第一ほうせい,32,曇時々雨,29,21
+20250912,金,9539342a-9cc3-4fe8-911f-d198b54f8717,第一ほうせい,62,雨時々曇,28,21
+20250913,土,9539342a-9cc3-4fe8-911f-d198b54f8717,第一ほうせい,67,雨時々曇,26,21

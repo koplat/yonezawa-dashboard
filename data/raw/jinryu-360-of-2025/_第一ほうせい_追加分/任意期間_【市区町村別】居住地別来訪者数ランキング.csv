@@ -1,0 +1,4 @@
+start_date,end_date,dayflag,ranking,fromaddress,all_population,area_id,area_name,population,residence,residence_population_rate
+20250911,20250913,休日,1,山形県東置賜郡高畠町,35,9539342a-9cc3-4fe8-911f-d198b54f8717,第一ほうせい,35,22417,0.002
+20250911,20250913,休日,2,山形県米沢市,32,9539342a-9cc3-4fe8-911f-d198b54f8717,第一ほうせい,32,81258,0.0
+20250911,20250913,平日,1,山形県米沢市,47,9539342a-9cc3-4fe8-911f-d198b54f8717,第一ほうせい,47,81258,0.001
