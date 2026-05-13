@@ -5,20 +5,165 @@
   "tab_key": "naseba",
   "date_start": "2025-09-27",
   "date_end": "2025-09-28",
-  "last_updated": "2026-05-11T07:21:28.177Z",
+  "last_updated": "2026-05-13T06:26:34.209Z",
   "posts_count": 14,
   "impressions_estimated": 20000,
-  "sentiment_pct": 0,
+  "sentiment_pct": 21,
   "sentiment": {
-    "positive": 0,
-    "neutral": 14,
+    "positive": 3,
+    "neutral": 11,
     "negative": 0
   },
-  "word_freq": [],
+  "word_freq": [
+    [
+      "なせばなる",
+      6
+    ],
+    [
+      "まつり",
+      5
+    ],
+    [
+      "開催",
+      4
+    ],
+    [
+      "観光",
+      4
+    ],
+    [
+      "山形県米沢市",
+      4
+    ],
+    [
+      "米沢",
+      3
+    ],
+    [
+      "明日",
+      3
+    ],
+    [
+      "Naru",
+      2
+    ],
+    [
+      "Autumn",
+      2
+    ],
+    [
+      "Festival",
+      2
+    ],
+    [
+      "Yonezawa",
+      2
+    ],
+    [
+      "was",
+      2
+    ],
+    [
+      "around",
+      2
+    ],
+    [
+      "Denkoku",
+      2
+    ],
+    [
+      "Mori",
+      2
+    ],
+    [
+      "芋煮",
+      2
+    ],
+    [
+      "今日",
+      2
+    ],
+    [
+      "米沢牛",
+      2
+    ],
+    [
+      "美味",
+      2
+    ],
+    [
+      "ーーーーーーッ",
+      2
+    ],
+    [
+      "はぜひ",
+      2
+    ],
+    [
+      "記事",
+      2
+    ],
+    [
+      "更新",
+      2
+    ],
+    [
+      "しました",
+      2
+    ],
+    [
+      "今回",
+      2
+    ],
+    [
+      "上杉神社",
+      2
+    ],
+    [
+      "についてです",
+      2
+    ]
+  ],
   "hashtag_freq": [
     [
-      "-",
+      "#なせばなる秋まつり",
       14
+    ],
+    [
+      "#米沢市",
+      3
+    ],
+    [
+      "#山形県米沢市",
+      3
+    ],
+    [
+      "#上杉神社",
+      2
+    ],
+    [
+      "#伝国の杜",
+      2
+    ],
+    [
+      "#むすび丸",
+      2
+    ],
+    [
+      "#かねたん",
+      2
+    ],
+    [
+      "#けーじろー",
+      2
+    ],
+    [
+      "#山形県",
+      2
+    ],
+    [
+      "#どん丼まつり",
+      2
     ]
   ],
   "timeline": [
@@ -48,55 +193,67 @@
       "date": "2025-09-30",
       "platform": "X",
       "handle": "@YUI_OKUDA_0108",
-      "text": "-",
+      "text": "Last week, at the Naseba Naru Autumn Festival in Yonezawa, a mystery-solving game was held🎶 I explored the shrines around Denkoku-no-Mori and figured out the answer🎵 A lot of fun✨ I learned more about Yonezawa😊 I was given an I love Yonezawa badge as a prize💕 Thank you so much🎶",
       "likes": 45,
       "reposts": 0,
       "hashtags": [
-        "-"
+        "#なせばなる秋まつり"
       ]
     },
     {
       "date": "2025-09-28",
       "platform": "X",
       "handle": "@YUI_OKUDA_0108",
-      "text": "-",
+      "text": "Yesterday, I went to the area around Uesugi Shrine and Denkoku no Mori for the Nasaseba Naru Autumn Festival🎶 There were lots of lively people and food stalls🎵 Miyagi's tourism promotional mascot Musubimaru was also there✨ So cute💕 I had the Yonezawa Beef Dojo Bowl from Matsukawa Bento Shop🎶 So delicious😋 I enjoyed autumn in Yonezawa🍁🎵",
       "likes": 44,
       "reposts": 0,
       "hashtags": [
-        "-"
+        "#なせばなる秋まつり",
+        "#上杉神社",
+        "#伝国の杜",
+        "#むすび丸"
       ]
     },
     {
       "date": "2025-09-27",
       "platform": "X",
       "handle": "@uesugi_museum",
-      "text": "-",
+      "text": "【ご来館されるお客様にお願い】 本日より伝国の杜周辺では「なせばなる秋祭り」が行われています✨ お祭りの期間中は出店がたくさんでるので楽しみにしている方も多いかと思います。 そこで皆様に博物館から飲食物についてのお願いがあります。",
       "likes": 31,
       "reposts": 0,
       "hashtags": [
-        "-"
+        "#伝国の杜",
+        "#なせばなる秋まつり"
       ]
     },
     {
       "date": "2025-09-28",
       "platform": "X",
       "handle": "@udakapiuda",
-      "text": "-",
+      "text": "#なせばなる秋まつり 今年も賑やかに開催されました〜ヽ(=´▽`=)ﾉ",
       "likes": 24,
       "reposts": 0,
       "hashtags": [
-        "-"
+        "#なせばなる秋まつり",
+        "#むすび丸",
+        "#こいきさん",
+        "#かねたん",
+        "#けーじろー"
       ]
     },
     {
       "date": "2025-09-28",
       "platform": "X",
       "handle": "@noriyuki53",
-      "text": "-",
+      "text": "#なせばなる秋まつり #山形県 #米沢市 #どん丼まつり #芋煮 かねたん愛の芋煮セット食べてきました。塩味と甘味がちょうどいい塩梅でおいしかったです。お肉ゴロゴロ、里芋ゴロゴロ具沢山で食べ応えもありました。この祭り来るたびにこの芋煮食べてます。米沢ビーフシチューもいただきました。",
       "likes": 18,
       "reposts": 0,
       "hashtags": [
-        "-"
+        "#なせばなる秋まつり",
+        "#山形県",
+        "#米沢市",
+        "#どん丼まつり",
+        "#芋煮"
       ]
     }
   ]
