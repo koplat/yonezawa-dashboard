@@ -701,8 +701,8 @@ main{padding:28px 0 48px}
 <div id="lodging-ctx-shiki"></div>
 
 <div class="kpi-grid">
-<div class="kpi-card"><div class="kpi-label">4イベント合計（仮）</div><div class="kpi-value">218,000<span class="kpi-unit">人</span></div><div class="kpi-change">実値合計：水上13,909 + 秋16,266 + 雪25,916 = 56,091人 + 上杉まつり(仮)</div></div>
-<div class="kpi-card"><div class="kpi-label">最大集客</div><div class="kpi-value" style="font-size:18px">雪灯篭 2/8-9</div><div class="kpi-change">25,916人（実値最大）</div></div>
+<div class="kpi-card"><div class="kpi-label">4イベント合計</div><div class="kpi-value">95,927<span class="kpi-unit">人</span></div><div class="kpi-change">全実値：水上13,909 + 秋16,266 + 雪25,916 + 上杉39,836</div></div>
+<div class="kpi-card"><div class="kpi-label">最大集客</div><div class="kpi-value" style="font-size:18px">上杉まつり 4/29-5/3</div><div class="kpi-change">39,836人（実値最大）</div></div>
 <div class="kpi-card"><div class="kpi-label">延べ宿泊人数</div><div class="kpi-value">15,200<span class="kpi-unit">人泊</span></div><div class="kpi-change">仮値</div></div>
 <div class="kpi-card"><div class="kpi-label">平均滞在時間</div><div class="kpi-value">3.2<span class="kpi-unit">時間</span></div><div class="kpi-change">仮値</div></div>
 </div>
@@ -1354,7 +1354,7 @@ main{padding:28px 0 48px}
 <thead><tr><th>イベント</th><th>データ種別</th><th>提供元</th><th>対象期間</th><th>粒度</th><th>状態</th></tr></thead>
 <tbody>
 <tr><td>置賜GW人流レポート</td><td>人流データ</td><td>人流データ提供</td><td>4/28〜5/5</td><td>日別×拠点</td><td><span class="status-pill ready">投入済</span></td></tr>
-<tr><td>米沢上杉まつり</td><td>人流データ / 宿泊 / カメラ</td><td>各事業者</td><td>春・4/29〜5/3</td><td>各種</td><td><span class="status-pill pending">未投入</span></td></tr>
+<tr><td>米沢上杉まつり</td><td>人流データ / 宿泊 / カメラ</td><td>各事業者</td><td>春・4/29〜5/3</td><td>各種</td><td><span class="status-pill ready">投入済</span></td></tr>
 <tr><td>米沢納涼水上花火大会</td><td>人流データ / 宿泊 / カメラ</td><td>各事業者</td><td>夏・8/8</td><td>各種</td><td><span class="status-pill ready">投入済</span></td></tr>
 <tr><td>360°よねざわオープンファクトリー</td><td>人流データ / 宿泊 / カメラ</td><td>各事業者</td><td>9/11〜13</td><td>各種</td><td><span class="status-pill ready">投入済</span></td></tr>
 <tr><td>なせばなる秋まつり</td><td>人流データ / 宿泊 / カメラ</td><td>各事業者</td><td>9/27〜28</td><td>各種</td><td><span class="status-pill ready">投入済</span></td></tr>
@@ -1636,7 +1636,7 @@ new Chart(document.getElementById('chartShikiByEvent'), {
   type:'line',
   data:{labels:['9時','10時','11時','12時','13時','14時','15時','16時','17時','18時','19時','20時'],
     datasets:[
-      {label:'上杉まつり 5/3 (仮値)',data:[8000,18000,32000,48000,62000,92000,85000,68000,42000,28000,15000,8000],borderColor:COLORS.shiki,backgroundColor:COLORS.shiki+'20',borderDash:[4,4],tension:0.3},
+      {label:'上杉まつり 5/3 川中島合戦',data:[158,304,458,594,477,333,388,280,31,45,15,15],borderColor:COLORS.shiki,backgroundColor:COLORS.shiki+'20',tension:0.3},
       {label:'水上花火 8/8',data:[669,758,883,1182,1048,959,1106,1152,2506,5347,9602,10698],borderColor:'#0891b2',tension:0.3},
       {label:'なせばなる秋 9/27-28',data:[1488,2577,3135,3235,3339,3124,2636,1893,1324,798,545,526],borderColor:'#c9a96e',tension:0.3},
       {label:'雪灯篭 2/8-9',data:[1049,1543,2107,2703,2596,3059,3051,3689,5006,5719,5279,3470],borderColor:COLORS.secondary,tension:0.3}
@@ -1660,7 +1660,8 @@ new Chart(document.getElementById('chartShikiDwell'), {
   type:'bar',
   data:{labels:['9時','10時','11時','12時','13時','14時','15時','16時','17時','18時','19時'],
     datasets:[
-      {label:'上杉神社メッシュ',data:[4200,8500,15200,22000,28500,42000,38500,29000,18000,12000,6500],backgroundColor:COLORS.shiki+'cc'},
+      {label:'上杉神社メッシュ',data:[2448,3863,4757,5291,7081,6165,5176,3952,2867,1800,1178],backgroundColor:COLORS.shiki+'cc'},
+      // 伝国の杜メッシュ: 実データ未取得（KDDI Location Analyzerの今回XLSXに該当メッシュ無し）。仮値据え置き。
       {label:'伝国の杜メッシュ',data:[2800,5200,9500,14200,18800,24500,21200,16500,10500,7800,4200],backgroundColor:COLORS.shiki+'66'}
     ]},
   options:{responsive:true,maintainAspectRatio:false,scales:{x:{stacked:true},y:{stacked:true,beginAtZero:true,ticks:{callback:v=>(v/1000)+'k人'}}}}
