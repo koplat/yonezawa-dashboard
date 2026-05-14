@@ -1551,7 +1551,7 @@ new Chart(document.getElementById('chartCompare'), {
   data:{labels:['上杉まつり','水上花火','オープンファクトリー','戦国花火','雪灯篭'],
     datasets:[
       {label:'2025年度',data:[108000,28000,45000,82000,62000],backgroundColor:COLORS.primary,borderRadius:3},
-      {label:'2024年度（仮値）',data:[98000,26500,37000,69400,58000],backgroundColor:COLORS.prevYear,borderRadius:3}
+      {label:'2024年度',data:[98000,26500,37000,69400,58000],backgroundColor:COLORS.prevYear,borderRadius:3}
     ]},
   options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v.toLocaleString()+'人'}}}}
 });
