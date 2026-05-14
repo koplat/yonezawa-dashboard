@@ -1,0 +1,3 @@
+day,weekday,area_id,area_name,population,weather,high_temperature,low_temperature
+20250927,土,f37b5eb4-8630-46e2-8735-8aa7cbb9867d,上杉神社,8377,晴一時曇,27,14
+20250928,日,f37b5eb4-8630-46e2-8735-8aa7cbb9867d,上杉神社,7889,晴一時小雨,29,11
